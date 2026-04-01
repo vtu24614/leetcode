@@ -1,46 +1,73 @@
+
+
+
+
+
+
+
+
+
+
+ 
+ 
+
+
+
+
+
+        
+    
 import java.util.*;
 
+// Definition for a binary tree node
 class TreeNode {
     int val;
-    TreeNode left;
-    TreeNode right;
+        TreeNode left, right;
 
-    TreeNode(int val) {
-        this.val = val;
-        this.left = null;
-        this.right = null;
-    }
-}
+            TreeNode(int val) {
+                    this.val = val;
+                            left = right = null;
+                                }
+                                }
 
-class Solution {
-    public List<List<Integer>> levelOrder(TreeNode root) {
-        List<List<Integer>> result = new ArrayList<>();
-        if (root == null) {
-            return result;
-        }
+                                class Solution {
+                                    public List<List<Integer>> levelOrder(TreeNode root) {
+                                            List<List<Integer>> result = new ArrayList<>();
 
-        Queue<TreeNode> queue = new LinkedList<>();
-        queue.offer(root);
+                                                    if (root == null) return result;
 
-        while (!queue.isEmpty()) {
-            int levelSize = queue.size();
-            List<Integer> level = new ArrayList<>();
+                                                            Queue<TreeNode> queue = new LinkedList<>();
+                                                                    queue.offer(root);
 
-            for (int i = 0; i < levelSize; i++) {
-                TreeNode node = queue.poll();
-                level.add(node.val);
+                                                                            while (!queue.isEmpty()) {
+                                                                                        int size = queue.size(); // number of nodes at current level
+                                                                                                    List<Integer> level = new ArrayList<>();
 
-                if (node.left != null) {
-                    queue.offer(node.left);
-                }
-                if (node.right != null) {
-                    queue.offer(node.right);
-                }
-            }
+                                                                                                                for (int i = 0; i < size; i++) {
+                                                                                                                                TreeNode node = queue.poll();
+                                                                                                                                                level.add(node.val);
 
-            result.add(level);
-        }
+                                                                                                                                                                if (node.left != null) queue.offer(node.left);
+                                                                                                                                                                                if (node.right != null) queue.offer(node.right);
+                                                                                                                                                                                            }
 
-        return result;
-    }
-}
+                                                                                                                                                                                                        result.add(level);
+                                                                                                                                                                                                                }
+
+                                                                                                                                                                                                                        return result;
+                                                                                                                                                                                                                            }
+
+                                                                                                                                                                                                                                // Main method for testing
+                                                                                                                                                                                                                                    public static void main(String[] args) {
+                                                                                                                                                                                                                                            Solution obj = new Solution();
+
+                                                                                                                                                                                                                                                    TreeNode root = new TreeNode(3);
+                                                                                                                                                                                                                                                            root.left = new TreeNode(9);
+                                                                                                                                                                                                                                                                    root.right = new TreeNode(20);
+                                                                                                                                                                                                                                                                            root.right.left = new TreeNode(15);
+                                                                                                                                                                                                                                                                                    root.right.right = new TreeNode(7);
+
+                                                                                                                                                                                                                                                                                            System.out.println(obj.levelOrder(root));
+                                                                                                                                                                                                                                                                                                    // Output: [[3], [9, 20], [15, 7]]
+                                                                                                                                                                                                                                                                                                        }
+                                                                                                                                                                                                                                                                                                        }
