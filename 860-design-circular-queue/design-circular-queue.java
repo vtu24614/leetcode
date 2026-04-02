@@ -1,50 +1,55 @@
 class MyCircularQueue {
-    private int[] queue;
-    private int head;
-    private int tail;
+    private int[] data;
+    private int front;
+    private int rear;
     private int size;
     private int capacity;
 
     public MyCircularQueue(int k) {
-        this.queue = new int[k];
-        this.capacity = k;
-        this.head = 0;
-        this.tail = -1; // Start at -1 so the first enQueue moves it to 0
-        this.size = 0;
+        capacity = k;
+        data = new int[capacity];
+        front = 0;
+        rear = 0;
+        size = 0;
     }
-    
+
+    // Inserts an element into the circular queue
     public boolean enQueue(int value) {
         if (isFull()) return false;
-        
-        // Circularly increment tail: (tail + 1) % capacity
-        tail = (tail + 1) % capacity;
-        queue[tail] = value;
+        data[rear] = value;
+        rear = (rear + 1) % capacity;
         size++;
         return true;
     }
-    
+
+    // Deletes an element from the circular queue
     public boolean deQueue() {
         if (isEmpty()) return false;
-        
-        // Circularly increment head: (head + 1) % capacity
-        head = (head + 1) % capacity;
+        front = (front + 1) % capacity;
         size--;
         return true;
     }
-    
+
+    // Gets the front item
     public int Front() {
-        return isEmpty() ? -1 : queue[head];
+        if (isEmpty()) return -1;
+        return data[front];
     }
-    
+
+    // Gets the last item
     public int Rear() {
-        return isEmpty() ? -1 : queue[tail];
+        if (isEmpty()) return -1;
+        // rear points to next insertion index, so need to go back one
+        return data[(rear - 1 + capacity) % capacity];
     }
-    
+
+    // Checks if queue is empty
     public boolean isEmpty() {
         return size == 0;
     }
-    
+
+    // Checks if queue is full
     public boolean isFull() {
         return size == capacity;
     }
-}    
+}
