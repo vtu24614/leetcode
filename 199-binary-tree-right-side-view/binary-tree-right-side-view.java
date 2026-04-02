@@ -1,17 +1,5 @@
 import java.util.*;
 
-class TreeNode {
-    int val;
-    TreeNode left;
-    TreeNode right;
-
-    TreeNode(int val) {
-        this.val = val;
-        this.left = null;
-        this.right = null;
-    }
-}
-
 class Solution {
     public List<Integer> rightSideView(TreeNode root) {
         List<Integer> result = new ArrayList<>();
@@ -21,13 +9,12 @@ class Solution {
         queue.offer(root);
 
         while (!queue.isEmpty()) {
-            int levelSize = queue.size();
-
-            for (int i = 0; i < levelSize; i++) {
+            int size = queue.size();
+            for (int i = 0; i < size; i++) {
                 TreeNode node = queue.poll();
 
-                // last node in this level
-                if (i == levelSize - 1) {
+                // Add the last node of this level
+                if (i == size - 1) {
                     result.add(node.val);
                 }
 
