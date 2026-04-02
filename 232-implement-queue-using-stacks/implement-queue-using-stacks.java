@@ -1,71 +1,42 @@
-import java.util.*;
+import java.util.Stack;
 
 class MyQueue {
     private Stack<Integer> inStack;
-        private Stack<Integer> outStack;
+    private Stack<Integer> outStack;
 
-            public MyQueue() {
-                    inStack = new Stack<>();
-                            outStack = new Stack<>();
-                                }
-
-                                    // Push element to back of queue
-                                        public void push(int x) {
-                                                inStack.push(x);
-                                                    }
-
-                                                        // Remove element from front
-                                                            public int pop() {
-                                                                    shiftStacks();
-                                                                            return outStack.pop();
-                                                                                }
-
-                                                                                    // Get front element
-                                                                                        public int peek() {
-                                                                                                shiftStacks();
-                                                                                                        return outStack.peek();
-                                                                                                            }
-
-                                                                                                                // Check if empty
-                                                                                                                    public boolean empty() {
-                                                                                                                            return inStack.isEmpty() && outStack.isEmpty();
-                                                                                                                                }
-
-                                                                                                                                    // Helper function to move elements
-                                                                                                                                        private void shiftStacks() {
-                                                                                                                                                if (outStack.isEmpty()) {
-                                                                                                                                                            while (!inStack.isEmpty()) {
-                                                                                                                                                                            outStack.push(inStack.pop());
-                                                                                                                                                                                        }
-                                                                                                                                                                                                }
-                                                                                                                                                                                                    }
-                                                                                                                                                                                                    }
-
-
-        
-
+    public MyQueue() {
+        inStack = new Stack<>();
+        outStack = new Stack<>();
+    }
     
-
-        
+    // Push element to the back of the queue
+    public void push(int x) {
+        inStack.push(x);
+    }
     
+    // Removes the element from the front of the queue and returns it
+    public int pop() {
+        moveInToOut();
+        return outStack.pop();
+    }
     
-
-        
-
+    // Get the front element
+    public int peek() {
+        moveInToOut();
+        return outStack.peek();
+    }
     
-
-        
+    // Returns true if the queue is empty
+    public boolean empty() {
+        return inStack.isEmpty() && outStack.isEmpty();
+    }
     
-    
-
-        
-    
-
-
-
-
-
-
-
-
-
+    // Helper: move elements from inStack to outStack if outStack is empty
+    private void moveInToOut() {
+        if (outStack.isEmpty()) {
+            while (!inStack.isEmpty()) {
+                outStack.push(inStack.pop());
+            }
+        }
+    }
+}
